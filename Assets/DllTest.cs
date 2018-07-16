@@ -63,7 +63,7 @@ public class DllTest : MonoBehaviour
 
 #endif
 
-    private static extern int Test(float[] a_pafSourceRGBA,
+    private static extern int Encode(float[] a_pafSourceRGBA,
                 uint a_uiSourceWidth,
                 uint a_uiSourceHeight,
                 Format a_format,
@@ -101,7 +101,7 @@ public class DllTest : MonoBehaviour
                 pixels[i + 3] = colors[i].a;
             }
 
-            Test(pixels, 512, 512, Format.RGBA8, ErrorMetric.RGBA, 0.4f, 1, 1, out output, out encodingBitsBytes, out extendedWidth, out extendedHeight, out encodingTime);// System.BitConverter.ToSingle(bytes, 0).ToString();
+            Encode(pixels, 512, 512, Format.RGBA8, ErrorMetric.RGBA, 0.4f, 1, 1, out output, out encodingBitsBytes, out extendedWidth, out extendedHeight, out encodingTime);// System.BitConverter.ToSingle(bytes, 0).ToString();
             text.text = encodingTime.ToString();
 
             //Texture2D compressedTexture = new Texture2D((int)extendedWidth, (int)extendedHeight, TextureFormat.ETC2_RGBA8, false);
