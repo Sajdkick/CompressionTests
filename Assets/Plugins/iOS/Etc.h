@@ -38,8 +38,6 @@ namespace Etc
 		std::shared_ptr<unsigned char> paucEncodingBits;
 	};
 
-
-
 	// C-style inteface to the encoder
 	extern "C" void Encode(float *a_pafSourceRGBA,
 				unsigned int a_uiSourceWidth,
@@ -49,7 +47,7 @@ namespace Etc
 				float a_fEffort,
 				unsigned int a_uiJobs,
 				unsigned int a_uimaxJobs,
-				unsigned char **a_ppaucEncodingBits,
+				char **a_ppaucEncodingBits,
 				unsigned int *a_puiEncodingBitsBytes,
 				unsigned int *a_puiExtendedWidth,
 				unsigned int *a_puiExtendedHeight,

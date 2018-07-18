@@ -41,7 +41,7 @@ namespace Etc
 
 
 	// C-style inteface to the encoder
-	extern "C" void Encode(float *a_pafSourceRGBA,
+	extern "C" __declspec(dllexport) void Encode(float *a_pafSourceRGBA,
 				unsigned int a_uiSourceWidth,
 				unsigned int a_uiSourceHeight,
 				Image::Format a_format,
@@ -49,7 +49,7 @@ namespace Etc
 				float a_fEffort,
 				unsigned int a_uiJobs,
 				unsigned int a_uimaxJobs,
-				unsigned char **a_ppaucEncodingBits,
+				char **a_ppaucEncodingBits,
 				unsigned int *a_puiEncodingBitsBytes,
 				unsigned int *a_puiExtendedWidth,
 				unsigned int *a_puiExtendedHeight,

@@ -17,11 +17,17 @@
 #include "EtcConfig.h"
 #include "Etc.h"
 #include "EtcFilter.h"
+#include "EtcFile.h"
+#include "EtcFileHeader.h"
 
 #include <string.h>
+#include <iostream>
 
 namespace Etc
 {
+	
+	int test(){return 1337;}
+	
 	// ----------------------------------------------------------------------------------------------------
 	// C-style inteface to the encoder
 	//
@@ -33,24 +39,55 @@ namespace Etc
 				float a_fEffort,
 				unsigned int a_uiJobs,
 				unsigned int a_uiMaxJobs,
-				unsigned char **a_ppaucEncodingBits,
-				unsigned int *a_puiEncodingBitsBytes,
+				char **output,
+				unsigned int *size,
 				unsigned int *a_puiExtendedWidth,
 				unsigned int *a_puiExtendedHeight, 
 				int *a_piEncodingTime_ms, bool a_bVerboseOutput)
 	{
 
-		Image image(a_pafSourceRGBA, a_uiSourceWidth,
-					a_uiSourceHeight,
-					a_eErrMetric);
-		image.m_bVerboseOutput = a_bVerboseOutput;
-		image.Encode(a_format, a_eErrMetric, a_fEffort, a_uiJobs, a_uiMaxJobs);
+		// Image image(a_pafSourceRGBA, a_uiSourceWidth,
+					// a_uiSourceHeight,
+					// a_eErrMetric);
+		// image.m_bVerboseOutput = a_bVerboseOutput;
+		// image.Encode(a_format, a_eErrMetric, a_fEffort, a_uiJobs, a_uiMaxJobs);
 
-		*a_ppaucEncodingBits = image.GetEncodingBits();
-		*a_puiEncodingBitsBytes = image.GetEncodingBitsBytes();
-		*a_puiExtendedWidth = image.GetExtendedWidth();
-		*a_puiExtendedHeight = image.GetExtendedHeight();
-		*a_piEncodingTime_ms = image.GetEncodingTimeMs();
+		// *a_puiExtendedWidth = image.GetExtendedWidth();
+		// *a_puiExtendedHeight = image.GetExtendedHeight();
+		// *a_piEncodingTime_ms = image.GetEncodingTimeMs();
+
+        // Etc::File file("test.ktx", Etc::File::Format::INFER_FROM_FILE_EXTENSION, a_format, image.GetEncodingBits(), image.GetEncodingBitsBytes(),
+            // image.GetSourceWidth(), image.GetSourceHeight(),
+            // image.GetExtendedWidth(), image.GetExtendedHeight());
+
+        //*size = image.GetEncodingBitsBytes();
+        // char* fullFile = new char[*size];
+        // char* start = fullFile;
+
+        //Etc::FileHeader_Ktx header(&file);
+        //char* step1 = reinterpret_cast<char*>(header.GetData());
+        //for (int i = 0; i < sizeof(Etc::FileHeader_Ktx::Data); i++)
+        //{
+        //    *fullFile = step1[i];
+        //    fullFile++;
+        //}
+
+        //char* step2 = reinterpret_cast<char*>(image.GetEncodingBitsBytes());
+        //for (int i = 0; i < sizeof(image.GetEncodingBitsBytes()); i++)
+        //{
+        //    *fullFile = step2[i];
+        //    fullFile++;
+        //}
+
+        // char* step3 = reinterpret_cast<char*>(image.GetEncodingBits());
+        // for (int i = 0; i < image.GetEncodingBitsBytes(); i++)
+        // {
+            // *fullFile = step3[i];
+            // fullFile++;
+        // }
+
+        //*output = reinterpret_cast<char*>(image.GetEncodingBits());
+
 	}
 
 	void EncodeMipmaps(float *a_pafSourceRGBA,

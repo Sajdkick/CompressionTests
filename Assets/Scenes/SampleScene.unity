@@ -223,7 +223,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: fd8e24f136e24e647afeb70677c9e6a6, type: 2}
+  - {fileID: 2100000, guid: 8c30cd25bffa02641a61d01b51df12f5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -257,8 +257,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 280588622}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1001, y: 100, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 577.85}
+  m_LocalScale: {x: 1001, y: 629.43, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -299,7 +299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef397f5d92f9e9545a31d67934f37c2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  texture: {fileID: 2800000, guid: 351362d70eb9f204383978c5b6c6a9c1, type: 3}
+  texture: {fileID: 2800000, guid: 66dc82e6337e7ff40b19ee5b8cca6594, type: 3}
   display: {fileID: 280588622}
   text: {fileID: 914879856}
 --- !u!20 &282840813
