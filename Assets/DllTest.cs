@@ -1,14 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using System.Runtime.InteropServices;
 
 public class DllTest : MonoBehaviour
 {
-
-    public Texture2D texture;
     public GameObject display;
-    public UnityEngine.UI.Text text;
+    public Texture2D texture;
 
     enum Format
     {
@@ -57,9 +53,7 @@ public class DllTest : MonoBehaviour
 
     // Other platforms load plugins dynamically, so pass the name
     // of the plugin's dynamic library.
-    //[DllImport("crnlib", EntryPoint = "TestIfItWorks2", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
-    //[return: MarshalAs(UnmanagedType.I1)]
-    [DllImport("hello", EntryPoint = "Encode")]
+    [DllImport("EtcLib", EntryPoint = "Encode")]
 
 #endif
 
@@ -77,24 +71,7 @@ public class DllTest : MonoBehaviour
                 out uint a_puiExtendedHeight,
                 out uint a_piEncodingTime_ms, bool a_bVerboseOutput = false);
 
-    void Awake()
-    {
-
-        try
-        {
-
-
-            Texture2D compressedTexture = CompressTexture(texture);
-            display.GetComponent<Renderer>().material.mainTexture = compressedTexture;
-
-        }
-        catch (System.Exception e)
-        {
-            text.text = e.ToString();
-        }
-    }
-
-    unsafe Texture2D CompressTexture(Texture2D texture)
+    static public unsafe Texture2D CompressTexture(Texture2D texture)
     {
         //////byte[] bytes = ;
         char* output;
@@ -102,6 +79,8 @@ public class DllTest : MonoBehaviour
         uint extendedWidth = 0;
         uint extendedHeight = 0;
         uint encodingTime = 0;
+
+        float time = Time.realtimeSinceStartup;
 
         float[] pixels = new float[texture.width * texture.height * 4];
         Color[] colors = texture.GetPixels();
@@ -115,7 +94,6 @@ public class DllTest : MonoBehaviour
         }
 
         Encode(pixels, (uint)texture.width, (uint)texture.height, Format.SRGB8A1, ErrorMetric.RGBA, 0.4f, 1, 1, out output, out encodingBitsBytes, out extendedWidth, out extendedHeight, out encodingTime);// System.BitConverter.ToSingle(bytes, 0).ToString();
-        text.text = encodingTime.ToString();
 
         byte[] compressedBytes = new byte[encodingBitsBytes];
 
@@ -128,12 +106,17 @@ public class DllTest : MonoBehaviour
         }
 
         Texture2D compressedTexture = new Texture2D((int)extendedWidth, (int)extendedHeight, TextureFormat.ETC2_RGBA1, false);
-        //System.Array.Reverse(compressedBytes);
         compressedTexture.LoadRawTextureData(compressedBytes);
         compressedTexture.Apply();
 
-        //System.IO.File.WriteAllBytes("UnityTest.ktx", compressedBytes);
+        Debug.Log("Time for everything: " + (Time.realtimeSinceStartup - time));
 
-        return texture;
+        return compressedTexture;
     }
+
+    void Awake()
+    {
+        display.GetComponent<Renderer>().material.mainTexture = CompressTexture(texture);
+    }
+
 }
